@@ -1,3 +1,7 @@
 body{
   background-color: #D7E9F7;
 }
+
+input {
+  padding: 5px 10px; /* Adjust the values as per your requirements */
+}
