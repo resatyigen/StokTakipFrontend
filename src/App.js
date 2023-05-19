@@ -1,12 +1,16 @@
-import Button from '@mui/material/Button';
+import React from 'react'
+import Header from './components/header/Header'
+import Sidebar from './components/sidebar/Sidebar'
+import Footer from './components/footer/Footer'
+import './App.css'
+import './assets/css/index.css'
 
 function App() {
   return (
     <div className="App">
-      <div className='bg-red-400'>
-        <h1 className='text-blue-600'>Merhaba</h1>
-        <Button variant="contained">Hello World</Button>
-      </div>
+      <Header />
+      <Sidebar />
+      <Footer />
     </div>
   );
 }
