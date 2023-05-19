@@ -2,12 +2,17 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Racoon from '../../assets/img/racoon.png';
+import Numbers from './Numbers';
+import Cta from './Cta';
+import Feature from './Feature';
+import Newstellers from './Newstellers';
+import Footer from './Footer';
 
 const navigation = [
   { name: 'Product', href: '#' },
   { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
   { name: 'Company', href: '#' },
+  { name: 'Contact', href: '#' },
 ]
 
 export default function Example() {
@@ -21,7 +26,7 @@ export default function Example() {
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
-                className="h-20 w-auto"
+                className="h-10 w-auto"
                 src={Racoon}
                 alt=""
               />
@@ -114,7 +119,7 @@ export default function Example() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Announcing our next round of funding.{' '}
+              Announcing our new feature.{' '}
               <a href="#" className="font-semibold text-indigo-600">
                 <span className="absolute inset-0" aria-hidden="true" />
                 Read more <span aria-hidden="true">&rarr;</span>
@@ -123,11 +128,10 @@ export default function Example() {
           </div>
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Data to enrich your online business
+              The easy way to track your inventory
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
+              Stay one step ahead with our inventory management app
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
@@ -155,6 +159,11 @@ export default function Example() {
           />
         </div>
       </div>
+      <Numbers/>
+      <Cta/>
+      <Feature/>
+      <Newstellers/>
+      <Footer/>
     </div>
   )
 }
