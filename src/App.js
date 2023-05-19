@@ -1,23 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import Button from '@mui/material/Button';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hello World!
-        </a>
-      </header>
+      <div className='bg-red-400'>
+        <h1 className='text-blue-600'>Merhaba</h1>
+        <Button variant="contained">Hello World</Button>
+      </div>
     </div>
   );
 }
