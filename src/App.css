@@ -1,7 +1,7 @@
 body{
-  background-color: #D7E9F7;
+  background-color: #D7E9F7 !important;
 }
 
 input {
-  padding: 5px 10px; /* Adjust the values as per your requirements */
+  padding: 5px 10px;
 }

@@ -6,6 +6,7 @@ import Dashboard from './views/dashboard/Dashboard';
 import Login from './views/login/Login';
 import Register from './views/register/Register';
 import ForgotPassword from './views/forgotpassword/ForgotPassword';
+import Error from './views/404/404';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route path="/forget-password">
           <ForgotPassword />
+        </Route>
+        <Route path="/404">
+          <Error />
         </Route>
       </Switch>
     </Router>
