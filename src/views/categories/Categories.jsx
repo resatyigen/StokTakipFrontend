@@ -1,21 +1,18 @@
 import React from 'react';
-import './dashboard.css';
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Sidebar';
-import ProductList from '../../components/productlist/ProductList';
-import '../../App.css';
-import '../../assets/css/index.css';
+import CategoryList from '../../components/categorylist/CategoryList';
 
-function App() {
+function Categories() {
   return (
     <div className="App">
       <Header />
       <div className="flex">
         <Sidebar />
-        <ProductList />
+        <CategoryList />
       </div>
     </div>
   );
 }
 
-export default App;
+export default Categories;

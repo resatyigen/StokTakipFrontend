@@ -1,12 +1,10 @@
 import React from 'react';
-import './dashboard.css';
+import './products.css';
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Sidebar';
 import ProductList from '../../components/productlist/ProductList';
-import '../../App.css';
-import '../../assets/css/index.css';
 
-function App() {
+function Products() {
   return (
     <div className="App">
       <Header />
@@ -18,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export default Products;

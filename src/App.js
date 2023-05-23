@@ -7,6 +7,12 @@ import Login from './views/login/Login';
 import Register from './views/register/Register';
 import ForgotPassword from './views/forgotpassword/ForgotPassword';
 import Error from './views/404/404';
+import AddProduct from './views/products/AddProduct';
+import EditProduct from './views/products/EditProduct';
+import Products from './views/products/Products';
+import AddCategories from './views/categories/AddCategories';
+import EditCategories from './views/categories/EditCategories';
+import Categories from './views/categories/Categories';
 
 function App() {
   return (
@@ -29,6 +35,24 @@ function App() {
         </Route>
         <Route path="/404">
           <Error />
+        </Route>
+        <Route path="/add-product">
+          <AddProduct />
+        </Route>
+        <Route path="/edit-product">
+          <EditProduct />
+        </Route>
+        <Route path="/products">
+          <Products />
+        </Route>
+        <Route path="/add-categories">
+          <AddCategories />
+        </Route>
+        <Route path="/edit-categories">
+          <EditCategories />
+        </Route>
+        <Route path="/categories">
+          <Categories />
         </Route>
       </Switch>
     </Router>

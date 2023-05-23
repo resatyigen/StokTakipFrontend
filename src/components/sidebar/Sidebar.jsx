@@ -18,7 +18,7 @@ const Sidebar = () => {
     <div className="flex">
       <div
         className={` ${
-          open ? "w-72" : "w-20 "
+          open ? "w-64" : "w-20 "
         } bg-violet-950 h-screen p-5  pt-8 relative duration-300`}
       >
         <BiChevronLeft
@@ -54,9 +54,6 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
-      </div>
-      <div className="h-screen flex-1 p-7">
-        <h1 className="text-2xl font-semibold"> Dashboard </h1>
       </div>
     </div>
   );
