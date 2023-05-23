@@ -4,9 +4,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import defaultPhoto from '../../assets/img/defaultPhoto.png';
 
 const navigation = [
-  { name: 'Panel', href: '#', current: true },
-  { name: 'Kategoriler', href: '#', current: false },
-  { name: 'Ürünler', href: '#', current: false },
+  { name: 'Panel', href: '/dashboard', current: true },
+  { name: 'Kategoriler', href: '/categories', current: false },
+  { name: 'Ürünler', href: '/products', current: false },
 ]
 
 function classNames(...classes) {
@@ -75,7 +75,7 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/profile"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Profile
@@ -85,7 +85,7 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/settings"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Settings
@@ -95,7 +95,7 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/login"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Logout

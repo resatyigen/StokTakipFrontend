@@ -18,7 +18,6 @@ const columns: GridColDef[] = [
     },
     { field: 'categoryName', headerName: 'Category Name', width: 150 },
     { field: 'color', headerName: 'Color', width: 100 },
-    { field: 'quantity', headerName: 'Quantity', type: 'number', width: 100 },
     {
       field: 'actions',
       headerName: 'Actions',
@@ -43,11 +42,11 @@ const columns: GridColDef[] = [
   ];
   
   const rows = [
-    { id: 1, imagePath: falanfilanImage, categoryName: 'Category 1', color: 'Black', quantity: 35 },
-    { id: 2, imagePath: falanfilanImage, categoryName: 'Category 2', color: 'Black', quantity: 25 },
-    { id: 3, imagePath: falanfilanImage, categoryName: 'Category 3', color: 'Black', quantity: 15 },
-    { id: 4, imagePath: falanfilanImage, categoryName: 'Category 4', color: 'Black', quantity: 55 },
-    { id: 5, imagePath: falanfilanImage, categoryName: 'Category 5', color: 'Black', quantity: 45 },
+    { id: 1, imagePath: falanfilanImage, categoryName: 'Category 1', color: 'Black' },
+    { id: 2, imagePath: falanfilanImage, categoryName: 'Category 2', color: 'Black' },
+    { id: 3, imagePath: falanfilanImage, categoryName: 'Category 3', color: 'Black' },
+    { id: 4, imagePath: falanfilanImage, categoryName: 'Category 4', color: 'Black' },
+    { id: 5, imagePath: falanfilanImage, categoryName: 'Category 5', color: 'Black' },
   ];
 
 const CategoryList = () => {
