@@ -6,16 +6,13 @@ import ProductList from '../../components/productlist/ProductList';
 import '../../App.css';
 import '../../assets/css/index.css';
 
-function App() {
+
+function Dashboard() {
   return (
-    <div className="App">
-      <Header />
-      <div className="flex">
-        <Sidebar />
-        <ProductList />
-      </div>
+    <div className="bg-red-400">
+      <h1>Dashboard main page</h1>
     </div>
   );
 }
 
-export default App;
+export default Dashboard;

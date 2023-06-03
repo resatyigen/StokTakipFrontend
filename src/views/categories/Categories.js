@@ -5,12 +5,8 @@ import CategoryList from '../../components/categorylist/CategoryList';
 
 function Categories() {
   return (
-    <div className="App">
-      <Header />
-      <div className="flex">
-        <Sidebar />
-        <CategoryList />
-      </div>
+    <div className="bg-blue-400">
+      <h1>Categories</h1>
     </div>
   );
 }

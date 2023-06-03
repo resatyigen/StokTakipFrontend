@@ -6,12 +6,8 @@ import ProductList from '../../components/productlist/ProductList';
 
 function Products() {
   return (
-    <div className="App">
-      <Header />
-      <div className="flex">
-        <Sidebar />
-        <ProductList />
-      </div>
+    <div>
+      <h1>Products</h1>
     </div>
   );
 }
