@@ -1,1 +1,1 @@
-# Redux öğreniyim halledicem Reşat
+Stok Takik Frontend Uygulaması.
