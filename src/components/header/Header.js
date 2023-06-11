@@ -6,6 +6,7 @@ import RacoonPNG from "../../assets/img/racoon.png";
 import RakunsoftPNG from "../../assets/img/logo.png";
 import { AiFillFolderAdd, AiFillFileAdd, AiFillFolder, AiFillFile } from "react-icons/ai";
 import { Button } from '@mui/material';
+import UserProfileMenu from '../UserProfileMenu/UserProfileMenu';
 
 const navigation = [
   { name: 'Panel', href: '/dashboard', current: true },
@@ -27,13 +28,14 @@ export default function Header() {
         </div>
         <div className='flex flex-row gap-x-5 ml-12'>
           <Button variant="outlined" startIcon={<AiFillFolderAdd size={29} />} href='/dashboard/add-category'>Kategori Ekle</Button>
-          <Button variant="outlined" startIcon={<AiFillFileAdd size={29} />}>Ürün Ekle</Button>
-          <Button variant="outlined" startIcon={<AiFillFolder size={29} />}>Kategori Listesi</Button>
-          <Button variant="outlined" startIcon={<AiFillFile size={29} />}>Ürün Listesi</Button>
+          <Button variant="outlined" startIcon={<AiFillFileAdd size={29} />} href='/dashboard/add-product'>Ürün Ekle</Button>
+          <Button variant="outlined" startIcon={<AiFillFolder size={29} />} href='/dashboard/categories' >Kategori Listesi</Button>
+          <Button variant="outlined" startIcon={<AiFillFile size={29} />} href='/dashboard/products'>Ürün Listesi</Button>
         </div>
       </div>
       <div>
-        <button className='bg-blue-400 p-4'></button>
+        <UserProfileMenu />
+        {/* <button className='bg-blue-400 p-4'></button> */}
       </div>
     </div>
   )

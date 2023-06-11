@@ -13,28 +13,23 @@ import {
     Divider,
 
 } from '@mui/material';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoryList } from "../../redux/slices/categorySlice";
-
 import { RxQuestionMarkCircled } from "react-icons/rx";
+import { useNavigate } from 'react-router-dom';
 
 function CategoryPanel() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getCategoryList());
     }, [dispatch])
 
-    const { success, loading, categoryList } = useSelector(state => state.categorySlice);
-
-
-    console.log(success);
-    console.log(loading);
-
+    const { getCategoryListState: { success, loading, categoryList } } = useSelector(state => state.categorySlice);
 
     const handleListItemClick = (event, id) => {
-
+        navigate(`/dashboard/products/${id}`);
     }
 
     return (
@@ -59,9 +54,9 @@ function CategoryPanel() {
                                     onClick={(event) => handleListItemClick(event, category.id)}
                                 >
                                     <ListItemAvatar>
-                                        <Avatar>
+                                        <Avatar variant='rounded'>
                                             {
-                                                category.imagePath === null
+                                                (category.imagePath === null || category.imagePath === "")
                                                     ? <RxQuestionMarkCircled size={31} color='#ffff' />
                                                     : <img src={`https://stokapi.rakunsoft.xyz/app-images/${category.imagePath}`} className='w-12' />
                                             }

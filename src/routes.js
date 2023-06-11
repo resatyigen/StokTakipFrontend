@@ -42,11 +42,11 @@ const routes = [
                 element: <AddCategory />
             },
             {
-                path: "edit-vategory",
+                path: "edit-category/:id",
                 element: <EditCategory />
             },
             {
-                path: "products",
+                path: "products/:categoryId?",
                 element: <Products />
             },
             {
@@ -54,7 +54,7 @@ const routes = [
                 element: <AddProduct />
             },
             {
-                path: "edit-product",
+                path: "edit-product/:id",
                 element: <EditProduct />
             }
         ]
