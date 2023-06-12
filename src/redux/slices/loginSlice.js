@@ -28,7 +28,7 @@ export const postLogin = createAsyncThunk(
 )
 
 export const loginSlice = createSlice({
-    name: 'counter',
+    name: 'loginSlice',
     initialState,
     reducers: {
         setLoginLoading(state, action) {
@@ -38,7 +38,7 @@ export const loginSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(postLogin.fulfilled, (state, action) => {
             const data = action.payload;
-            if (data.status === "SUCCESS") {
+            if (data?.status === "SUCCESS") {
                 setUserToken(data.token);
                 state.loginSuccess = true;
                 state.loginError = false;

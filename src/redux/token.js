@@ -7,7 +7,12 @@ function setUserToken(token) {
     localStorage.setItem('token', token);
 }
 
+function clearUserToken() {
+    localStorage.setItem('token', null);
+}
+
 export {
     getUserToken,
-    setUserToken
+    setUserToken,
+    clearUserToken
 }

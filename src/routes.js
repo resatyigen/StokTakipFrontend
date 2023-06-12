@@ -9,7 +9,8 @@ import EditCategory from "./views/categories/EditCategory";
 import Products from "./views/products/Products";
 import AddProduct from "./views/products/AddProduct";
 import EditProduct from "./views/products/EditProduct";
-
+import UserProfile from "./views/user/UserProfile";
+import PrivateRoute from "./components/Route/PrivateRoute";
 
 const routes = [
     {
@@ -56,15 +57,20 @@ const routes = [
             {
                 path: "edit-product/:id",
                 element: <EditProduct />
+            },
+            {
+                path: "user-profile",
+                element: <UserProfile />
             }
         ]
     }
 ]
 
 const authCheck = routes => routes.map(route => {
-    // if (route?.auth) {
-    //     route.element = <PrivateRoute>{route.element}</PrivateRoute>
-    // }
+    if (route?.auth) {
+        console.log("Auth var");
+        route.element = <PrivateRoute>{route.element}</PrivateRoute>
+    }
 
     if (route?.children) {
         route.children = authCheck(route.children);

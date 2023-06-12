@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUserToken } from "../token";
 import { JsonToQueryParameter } from "../../Utils/HttpQuery";
 const API_URL = "https://stokapi.rakunsoft.xyz";
-//const API_URL = "http://localhost:5092";
+// const API_URL = "http://localhost:5092";
 
 async function PostLogin(loginData) {
     return await axios.post(`${API_URL}/Auth/Login`, loginData);
@@ -10,7 +10,6 @@ async function PostLogin(loginData) {
 
 async function GetCategoryList() {
     const token = getUserToken();
-    console.log("User Token :", token);
     return await axios.get(`${API_URL}/Category/List`, {
         headers: {
             "Authorization": `Bearer ${token}`
@@ -20,7 +19,6 @@ async function GetCategoryList() {
 
 async function PostAddCategory(data) {
     const token = getUserToken();
-    console.log("User Token :", token);
     return await axios.post(`${API_URL}/Category/Add`,
         data,
         {
@@ -33,8 +31,6 @@ async function PostAddCategory(data) {
 
 async function PutEditCategory(data) {
     const token = getUserToken();
-    console.log("User Token :", token);
-
     return await axios.put(`${API_URL}/Category/Edit`,
         data,
         {
@@ -47,7 +43,6 @@ async function PutEditCategory(data) {
 
 async function DeleteCategory(data) {
     const token = getUserToken();
-    console.log("User Token :", token);
     const filterQuery = JsonToQueryParameter(data);
     return await axios.delete(`${API_URL}/Category/Delete?${filterQuery}`,
         {
@@ -60,10 +55,7 @@ async function DeleteCategory(data) {
 
 async function GetCategoryFilterList(filter) {
     const token = getUserToken();
-    console.log("User Token :", token);
     const filterQuery = JsonToQueryParameter(filter);
-
-    console.log("FILTER QUERY : ", filterQuery);
     return await axios.get(`${API_URL}/Category/FilterList?${filterQuery}`, {
         headers: {
             "Authorization": `Bearer ${token}`
@@ -73,10 +65,7 @@ async function GetCategoryFilterList(filter) {
 
 async function GetCategory(filter) {
     const token = getUserToken();
-    console.log("User Token :", token);
     const filterQuery = JsonToQueryParameter(filter);
-
-    console.log("FILTER QUERY : ", filterQuery);
     return await axios.get(`${API_URL}/Category?${filterQuery}`, {
         headers: {
             "Authorization": `Bearer ${token}`
@@ -86,7 +75,6 @@ async function GetCategory(filter) {
 
 async function PostAddProduct(data) {
     const token = getUserToken();
-    console.log("User Token :", token);
     return await axios.post(`${API_URL}/Product/Add`,
         data,
         {
@@ -99,10 +87,7 @@ async function PostAddProduct(data) {
 
 async function GetProductFilterList(filter) {
     const token = getUserToken();
-    console.log("User Token :", token);
     const filterQuery = JsonToQueryParameter(filter);
-
-    console.log("FILTER QUERY : ", filterQuery);
     return await axios.get(`${API_URL}/Product/FilterList?${filterQuery}`, {
         headers: {
             "Authorization": `Bearer ${token}`
@@ -112,10 +97,7 @@ async function GetProductFilterList(filter) {
 
 async function GetProduct(filter) {
     const token = getUserToken();
-    console.log("User Token :", token);
     const filterQuery = JsonToQueryParameter(filter);
-
-    console.log("FILTER QUERY : ", filterQuery);
     return await axios.get(`${API_URL}/Product?${filterQuery}`, {
         headers: {
             "Authorization": `Bearer ${token}`
@@ -125,8 +107,6 @@ async function GetProduct(filter) {
 
 async function PutEditProduct(data) {
     const token = getUserToken();
-    console.log("User Token :", token);
-
     return await axios.put(`${API_URL}/Product/Edit`,
         data,
         {
@@ -139,9 +119,41 @@ async function PutEditProduct(data) {
 
 async function DeleteProduct(data) {
     const token = getUserToken();
-    console.log("User Token :", token);
     const filterQuery = JsonToQueryParameter(data);
     return await axios.delete(`${API_URL}/Product/Delete?${filterQuery}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+}
+
+async function GetUserInfo() {
+    const token = getUserToken();
+    return await axios.get(`${API_URL}/User/UserInfo`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+}
+
+async function PutEditUserInfo(data) {
+    const token = getUserToken();
+    return await axios.put(`${API_URL}/User/EditUserInfo`,
+        data,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+}
+
+async function PutChangePassword(data) {
+    const token = getUserToken();
+    return await axios.put(`${API_URL}/User/ChangePassword`,
+        data,
         {
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -162,5 +174,8 @@ export {
     GetProductFilterList,
     GetProduct,
     PutEditProduct,
-    DeleteProduct
+    DeleteProduct,
+    GetUserInfo,
+    PutEditUserInfo,
+    PutChangePassword
 }
