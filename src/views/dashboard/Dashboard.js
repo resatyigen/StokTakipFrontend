@@ -1,14 +1,18 @@
 import React from 'react';
-import './dashboard.css';
-import '../../App.css';
-import '../../assets/css/index.css';
+import Panel from '../../components/Panel/Panel';
+import RacoonPNG from "../../assets/img/racoon.png";
+import LogoPNG from "../../assets/img/logo.png";
+
 
 
 function Dashboard() {
   return (
-    <div className="bg-red-400">
-      <h1>Dashboard main page</h1>
-    </div>
+    <Panel>
+      <div className='flex flex-col items-center justify-center'>
+        <img src={RacoonPNG} />
+        <img src={LogoPNG} className='mt-5 w-[150px]' />
+      </div>
+    </Panel>
   );
 }
 

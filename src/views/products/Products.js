@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Panel from '../../components/Panel/Panel';
 import {
   Paper,
@@ -40,15 +40,16 @@ function Products() {
     productName: "",
     rowsPerPage: 10,
     page: 0,
-    order: "desc"
+    order: "desc",
+    ...(categoryId ? { categoryId } : {})
   });
 
   const [deletedProduct, setDeletedProduct] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
-  useEffect(() => {
-    dispatch(getProductFilterList(filter));
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getProductFilterList(filter));
+  // }, [dispatch])
 
   useEffect(() => {
     if (categoryId) {
@@ -59,18 +60,23 @@ function Products() {
           categoryId: categoryId
         }
       });
+
+      console.log("filterProps ccategoryid", filter);
     } else {
       setFilter((preFilter) => {
         const { categoryId: removadCategoryId, ...filterProps } = preFilter;
+        console.log("filterProps", filterProps);
         return filterProps;
       });
     }
   }, [categoryId])
 
-
-  useEffect(() => {
+  useMemo(() => {
     dispatch(getProductFilterList(filter));
   }, [filter])
+  // useEffect(() => {
+  //   dispatch(getProductFilterList(filter));
+  // }, [filter])
 
   useEffect(() => {
     if (!deleteProductState.loading && deleteProductState.success) {

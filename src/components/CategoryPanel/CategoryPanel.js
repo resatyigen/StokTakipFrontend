@@ -44,7 +44,7 @@ function CategoryPanel() {
                     <TextField id="outlined-basic" size='small' label="Kategori Ara" variant="outlined" />
                 </div>
                 <Divider />
-                <List component="nav" aria-label="main mailbox folders">
+                <List component="nav">
                     {
                         (!loading && success) && categoryList.map((category) => {
                             return (
@@ -58,7 +58,7 @@ function CategoryPanel() {
                                             {
                                                 (category.imagePath === null || category.imagePath === "")
                                                     ? <RxQuestionMarkCircled size={31} color='#ffff' />
-                                                    : <img src={`https://stokapi.rakunsoft.xyz/app-images/${category.imagePath}`} className='w-12' />
+                                                    : <img src={`https://stokapi.rakunsoft.xyz/app-images/${category.imagePath}`} className='w-12 bg-white' />
                                             }
                                         </Avatar>
                                     </ListItemAvatar>

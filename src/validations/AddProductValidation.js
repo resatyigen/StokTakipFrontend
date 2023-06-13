@@ -10,7 +10,7 @@ export default yup.object().shape({
     productName: yup
         .string()
         .min(3, "Çok Kısa !")
-        .max(30, "Çok Uzun !")
+        .max(200, "Çok Uzun !")
         .required("Gerekli !"),
 
     description: yup.string()
@@ -20,7 +20,7 @@ export default yup.object().shape({
         .string()
         .notRequired()
         .min(10, "Çok Kısa !")
-        .max(200, "Çok Uzun !"),
+        .max(350, "Çok Uzun !"),
 
     quantity: yup
         .number()

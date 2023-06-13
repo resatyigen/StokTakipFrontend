@@ -76,7 +76,7 @@ function EditProduct() {
                     id: product.id,
                     categoryId: product.categoryID,
                     productName: product.productName,
-                    description: product.description,
+                    description: product.description ?? "",
                     productUrl: product.productUrl,
                     quantity: product.quantity,
                     imageFile: null

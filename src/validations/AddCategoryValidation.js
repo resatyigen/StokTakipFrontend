@@ -5,7 +5,7 @@ export default yup.object().shape({
     categoryName: yup
         .string()
         .min(3, "Çok Kısa !")
-        .max(30, "Çok Uzun !")
+        .max(300, "Çok Uzun !")
         .required("Gerekli !"),
 
     description: yup.string()

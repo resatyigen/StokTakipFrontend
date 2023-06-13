@@ -13,7 +13,7 @@ import {
   TextField,
   IconButton
 } from '@mui/material';
-import { getCategoryFilterList, deleteCategory, setCategoryDeleted } from '../../redux/slices/categorySlice';
+import { getCategoryFilterList, deleteCategory } from '../../redux/slices/categorySlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RxQuestionMarkCircled } from "react-icons/rx";
 import { MdModeEdit, MdDelete } from "react-icons/md";
@@ -45,7 +45,6 @@ function Categories() {
 
   useEffect(() => {
     if (!deleteCategoryState.loading && deleteCategoryState.success) {
-      dispatch(setCategoryDeleted(false));
       dispatch(getCategoryFilterList(filter));
     }
   }, [deleteCategoryState.loading])
