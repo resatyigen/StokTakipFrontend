@@ -11,18 +11,21 @@ import {
   TableFooter,
   TablePagination,
   TextField,
-  IconButton
+  IconButton,
+  Tooltip
 } from '@mui/material';
-import { deleteProduct, getProductFilterList, setProductDeleted } from '../../redux/slices/productSlice';
+import { deleteProduct, getProductFilterList, putUpdateQuantity } from '../../redux/slices/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RxQuestionMarkCircled } from "react-icons/rx";
 import { MdModeEdit, MdDelete, MdCancel } from "react-icons/md";
 import DeleteProductModal from '../../components/Modal/DeleteProductModal';
 import Toast from "react-hot-toast";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getCategory } from '../../redux/slices/categorySlice';
 import classNames from 'classnames';
 import CategoryItem from '../../components/CategoryItem/CategoryItem';
+import { BsFillBoxSeamFill } from "react-icons/bs";
+import UpdateStockModal from '../../components/Modal/UpdateStockModal';
 
 function Products() {
   const dispatch = useDispatch();
@@ -31,7 +34,8 @@ function Products() {
 
   const {
     getProductFilterListState: { loading, error, success, productList, listSize },
-    deleteProductState
+    deleteProductState,
+    putUpdateQuantityState
   } = useSelector(state => state.productSlice);
 
   const { getCategoryState: { category, loading: categoryLoading } } = useSelector(state => state.categorySlice);
@@ -46,6 +50,8 @@ function Products() {
 
   const [deletedProduct, setDeletedProduct] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openUpdateQuantityModal, setOpenUpdateQuantityModal] = useState(false);
+  const [updateQuantityProduct, setUpdateQuantityProduct] = useState(null);
 
   // useEffect(() => {
   //   dispatch(getProductFilterList(filter));
@@ -84,6 +90,13 @@ function Products() {
       Toast.success("Ürün Silindi");
     }
   }, [deleteProductState.loading])
+
+  useEffect(() => {
+    if (!putUpdateQuantityState.loading && putUpdateQuantityState.success) {
+      dispatch(getProductFilterList(filter));
+      Toast.success("Ürün Stoğu Güncellendi");
+    }
+  }, [putUpdateQuantityState.loading])
 
   const handleChangePage = (event, page) => {
     setFilter((preFilter) => {
@@ -153,6 +166,20 @@ function Products() {
     navigate("/dashboard/products");
   }
 
+  const handleUpdateQuantity = (product) => {
+    setOpenUpdateQuantityModal(true);
+    setUpdateQuantityProduct(product);
+  }
+
+  const handleUpdateQuantityModalClose = () => {
+    setOpenUpdateQuantityModal(false);
+  }
+
+  const handleUpdateQuantityModal = ({ productId, quantity }) => {
+    dispatch(putUpdateQuantity({ productId, quantity }));
+    setOpenUpdateQuantityModal(false);
+  }
+
   return (
     <Panel title="Ürün Listesi">
       <DeleteProductModal
@@ -161,6 +188,12 @@ function Products() {
         onClose={handleDeleteModalClose}
         onYes={handleDeleteModalYes}
         onCancel={handleDeleteModalClose}
+      />
+      <UpdateStockModal
+        isOpen={openUpdateQuantityModal}
+        product={updateQuantityProduct}
+        onClose={handleUpdateQuantityModalClose}
+        onUpdate={handleUpdateQuantityModal}
       />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 500 }}>
@@ -179,7 +212,6 @@ function Products() {
                       />
                     )
                   }
-
                   <TextField label="Ürün Ara" size='small' className='ml-auto' onChange={handleChangeProductName} />
                 </div>
               </TableCell>
@@ -187,9 +219,9 @@ function Products() {
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell align="left">Ürün Resmi</TableCell>
-              <TableCell align="left">Kategori Adı</TableCell>
               <TableCell align="left">Ürün Adı</TableCell>
               <TableCell align="left">Açıklama</TableCell>
+              <TableCell align="left">Kategori Adı</TableCell>
               <TableCell align="left">Adet</TableCell>
               <TableCell align="left">Ürün Linki</TableCell>
               <TableCell align="left">İşlem</TableCell>
@@ -204,26 +236,41 @@ function Products() {
                       <TableCell>{product.id}</TableCell>
                       <TableCell align="left">
                         {
-
                           (product.imagePath === null || product.imagePath === "")
                             ? <RxQuestionMarkCircled size={31} color='#757575' />
                             : <img src={`https://stokapi.rakunsoft.xyz/app-images/${product.imagePath}`} className='w-12' />
-
                         }
                       </TableCell>
-                      <TableCell align="left">{product.category.categoryName}</TableCell>
                       <TableCell align="left">{product.productName}</TableCell>
                       <TableCell align="left">{product.description?.substring(0, 100)}</TableCell>
-                      <TableCell align="left">{product.quantity}</TableCell>
-                      <TableCell align="left">{product.productUrl}</TableCell>
+                      <TableCell align="left">{product.category.categoryName}</TableCell>
+                      <TableCell align="left">
+                        <div className='flex flex-row gap-x-2 items-center'>
+                          <span>{product.quantity}</span>
+                          <Tooltip title="Güncelle" placement='top'>
+                            <IconButton onClick={() => handleUpdateQuantity(product)}>
+                              <BsFillBoxSeamFill color='#6554AF' />
+                            </IconButton>
+                          </Tooltip>
+                        </div>
+                      </TableCell>
+                      <TableCell align="left">
+                        <Link to={product.productUrl} target='_blank' className='hover:text-cyan-700'>
+                          {product.productUrl}
+                        </Link>
+                      </TableCell>
                       <TableCell align="left">
                         <div className='flex flex-row gap-x-2'>
-                          <IconButton href={`/dashboard/edit-product/${product.id}`}>
-                            <MdModeEdit color='blue' />
-                          </IconButton>
-                          <IconButton onClick={() => handleDeleteProduct(product.productName, product.id)}>
-                            <MdDelete color='red' />
-                          </IconButton>
+                          <Tooltip title="Düzenle" placement='top'>
+                            <IconButton href={`/dashboard/edit-product/${product.id}`}>
+                              <MdModeEdit color='#0079FF' />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Sil" placement='top'>
+                            <IconButton onClick={() => handleDeleteProduct(product.productName, product.id)}>
+                              <MdDelete color='#FF0060' />
+                            </IconButton>
+                          </Tooltip>
                         </div>
                       </TableCell>
                     </TableRow>

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getUserToken } from "../token";
 import { JsonToQueryParameter } from "../../Utils/HttpQuery";
-const API_URL = "https://stokapi.rakunsoft.xyz";
-//const API_URL = "http://localhost:5092";
+// const API_URL = "https://stokapi.rakunsoft.xyz";
+const API_URL = "http://localhost:5092";
 
 async function PostLogin(loginData) {
     return await axios.post(`${API_URL}/Auth/Login`, loginData);
@@ -162,6 +162,18 @@ async function PutChangePassword(data) {
         });
 }
 
+async function PutUpdateQuantity(data) {
+    const token = getUserToken();
+    return await axios.put(`${API_URL}/Product/UpdateQuantity`,
+        data,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+}
+
 export {
     PostLogin,
     GetCategoryList,
@@ -177,5 +189,6 @@ export {
     DeleteProduct,
     GetUserInfo,
     PutEditUserInfo,
-    PutChangePassword
+    PutChangePassword,
+    PutUpdateQuantity
 }

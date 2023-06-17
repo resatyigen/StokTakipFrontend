@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { DeleteProduct, GetProduct, GetProductFilterList, PostAddProduct, PutEditProduct } from "../actions/actions";
+import {
+    DeleteProduct,
+    GetProduct,
+    GetProductFilterList,
+    PostAddProduct,
+    PutEditProduct,
+    PutUpdateQuantity
+} from "../actions/actions";
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { HttpError } from '../../Utils/HttpError';
 
@@ -28,6 +35,11 @@ const initialState = {
         error: false
     },
     putEditProductState: {
+        loading: false,
+        success: false,
+        error: false
+    },
+    putUpdateQuantityState: {
         loading: false,
         success: false,
         error: false
@@ -120,6 +132,24 @@ export const deleteProduct = createAsyncThunk(
     }
 )
 
+export const putUpdateQuantity = createAsyncThunk(
+    'productSlice/putUpdateQuantity',
+    async (data, thunk) => {
+        try {
+            thunk.dispatch(setPutUpdateQuantityLoading(true));
+            const result = await PutUpdateQuantity(data);
+            console.log("putUpdateQuantity : ", result);
+            return result.data;
+        } catch (error) {
+            console.log("putUpdateQuantity : ", error);
+            // hatalar toast ile gösterilecek.
+            HttpError(error);
+            thunk.dispatch(setPutUpdateQuantityLoading(false));
+        }
+
+    }
+)
+
 
 export const productSlice = createSlice({
     name: 'productSlice',
@@ -139,6 +169,9 @@ export const productSlice = createSlice({
         },
         setGetProductLoading(state, action) {
             state.getProductState.loading = action.payload;
+        },
+        setPutUpdateQuantityLoading(state, action) {
+            state.putUpdateQuantityState.loading = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -231,6 +264,22 @@ export const productSlice = createSlice({
                 }
             }
             console.log("deleteProduct Payload : ", action.payload);
+        }).addCase(putUpdateQuantity.fulfilled, (state, action) => {
+            const data = action.payload;
+            if (data?.status === "SUCCESS") {
+                state.putUpdateQuantityState = {
+                    loading: false,
+                    success: true,
+                    error: false
+                }
+            } else {
+                state.putUpdateQuantityState = {
+                    loading: false,
+                    success: false,
+                    error: true
+                }
+            }
+            console.log("putUpdateQuantity Payload : ", action.payload);
         })
     }
 })
@@ -241,7 +290,8 @@ export const {
     setGetProductFilterListLoading,
     setDeleteProductLoading,
     setPutEditProductLoading,
-    setGetProductLoading
+    setGetProductLoading,
+    setPutUpdateQuantityLoading
 } = productSlice.actions
 
 export default productSlice.reducer

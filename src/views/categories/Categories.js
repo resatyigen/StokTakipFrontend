@@ -11,7 +11,8 @@ import {
   TableFooter,
   TablePagination,
   TextField,
-  IconButton
+  IconButton,
+  Tooltip
 } from '@mui/material';
 import { getCategoryFilterList, deleteCategory } from '../../redux/slices/categorySlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -160,12 +161,16 @@ function Categories() {
                       <TableCell align="left">{category.description?.substring(0, 100)}</TableCell>
                       <TableCell align="left">
                         <div className='flex flex-row gap-x-2'>
-                          <IconButton href={`/dashboard/edit-category/${category.id}`}>
-                            <MdModeEdit color='blue' />
-                          </IconButton>
-                          <IconButton onClick={() => handleDeleteCategory(category.categoryName, category.id)}>
-                            <MdDelete color='red' />
-                          </IconButton>
+                          <Tooltip title="Düzenle" placement='top'>
+                            <IconButton href={`/dashboard/edit-category/${category.id}`}>
+                              <MdModeEdit color='#0079FF' />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Düzenle" placement='top'>
+                            <IconButton onClick={() => handleDeleteCategory(category.categoryName, category.id)}>
+                              <MdDelete color='#FF0060' />
+                            </IconButton>
+                          </Tooltip>
                         </div>
                       </TableCell>
                     </TableRow>
